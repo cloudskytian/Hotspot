@@ -61,6 +61,10 @@ namespace Hotspot
 
         public void Enable(object sender, EventArgs e)
         {
+            if (networkOperatorTetheringManager.TetheringOperationalState == TetheringOperationalState.Off)
+            {
+                Task.FromResult(networkOperatorTetheringManager.StartTetheringAsync());
+            }
             eventLogWatcher.Enabled = true;
             notifyIcon.ContextMenuStrip.Items.Remove(enable);
             notifyIcon.ContextMenuStrip.Items.Insert(0, disable);
